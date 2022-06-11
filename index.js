@@ -4,6 +4,7 @@ let totalScore;
 let currentScoreIndex;
 let level;
 const levelTitle = document.querySelector("#level-title");
+const body = document.querySelector("body");
 
 const computerPlay = () => {
   if (level === 0) {
@@ -23,6 +24,9 @@ const computerPlay = () => {
   }, 300);
 };
 const init = () => {
+  body.classList.contains("game-over")
+    ? body.classList.remove("game-over")
+    : "";
   totalScore = [];
   level = 0;
   currentScoreIndex = 0;
@@ -35,8 +39,8 @@ const checkStatus = (colour) => {
     if (currentScoreIndex === totalScore.length) {
       level++;
       currentScoreIndex = 0;
-      levelTitle.innerHTML = `LEVEL ${level}`;
       setTimeout(() => {
+        levelTitle.innerHTML = `LEVEL ${level}`;
         computerPlay();
       }, 700);
     }
@@ -45,10 +49,8 @@ const checkStatus = (colour) => {
       const audio = new Audio("../sounds/wrong.mp3");
       audio.play();
       levelTitle.innerHTML = RESTART_CONTENT;
-      const body = document.querySelector("body");
       body.classList.add("game-over");
       setTimeout(() => {
-        body.classList.remove("game-over");
         init();
       }, 300);
     }, 200);
