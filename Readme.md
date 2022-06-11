@@ -1,0 +1,1 @@
+A simple web application for Simon Game made with html css and js
